@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+@import "assets/bootstrap-sass/variables";
+@import '../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap';
+@import "assets/bootstrap-sass/bootwatch";
+@import 'styles/myStyle.scss';
+
+.portfolio {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 -10px;
+  padding: 0;
+  .portfolio-thumbnail {
+    margin-left: 10px;
+    margin-right: 10px;
+    width:220px;
+    .button-holder {
+      display: flex;
+      flex-direction: row;
+      .btn {
+        display: block;
+        flex-grow: 1;
+        &:last-child {
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+}
+.dashboard-controls {
+  margin-bottom: 21px;
+}
