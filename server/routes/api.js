@@ -20,7 +20,7 @@ db.once('open', function() {
   console.log("DB connection alive");
 });
 
-router.get('/posts', function (req, res) {
+router.get('/bears', function (req, res) {
   Bear.find(function (err, bears) {
     if(err)
       res.send(err);
