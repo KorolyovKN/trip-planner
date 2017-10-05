@@ -12,4 +12,9 @@ export class TestService {
     return this.http.get('/api/bears')
       .map( res => res.json());
   }
+
+  getAllPlans() {
+    return this.http.get('/api/plans')
+      .map( res => res.json());
+  }
 }

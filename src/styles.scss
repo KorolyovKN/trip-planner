@@ -2,7 +2,8 @@
 @import "assets/bootstrap-sass/variables";
 @import '../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap';
 @import "assets/bootstrap-sass/bootwatch";
-@import 'styles/myStyle.scss';
+@import 'styles/global';
+@import 'styles/modal';
 
 .portfolio {
   display: flex;

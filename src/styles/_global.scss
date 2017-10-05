@@ -1,0 +1,76 @@
+.m-both-xs {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.m-both-sm {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.m-both-md {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.m-both-lg {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.m-bottom-xs {
+  margin-bottom: 5px;
+}
+.m-bottom-sm {
+  margin-bottom: 10px;
+}
+.m-bottom-md {
+  margin-bottom: 15px;
+}
+.m-bottom-lg {
+  margin-bottom: 20px;
+}
+
+.m-top-xs {
+  margin-top: 5px;
+}
+.m-top-sm {
+  margin-top: 10px;
+}
+.m-top-md {
+  margin-top: 15px;
+}
+.m-top-lg {
+  margin-top: 20px;
+}
+
+.m-right-xs {
+  margin-right: 5px;
+}
+.m-right-sm {
+  margin-right: 10px;
+}
+.m-right-md {
+  margin-right: 15px;
+}
+.m-right-lg {
+  margin-right: 20px;
+}
+
+.m-left-xs {
+  margin-left: 5px;
+}
+.m-left-sm {
+  margin-left: 10px;
+}
+.m-left-md {
+  margin-left: 15px;
+}
+.m-left-lg {
+  margin-left: 20px;
+}
+
+.fade.show {
+  opacity:1;
+  background-color: rgba(#000, 0.3);
+}
+
+.modal.show .modal-dialog {
+  transform: translate(0);
+}

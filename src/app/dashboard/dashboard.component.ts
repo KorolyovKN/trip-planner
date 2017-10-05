@@ -8,14 +8,27 @@ import { TestService } from '../test.service';
 })
 export class DashboardComponent implements OnInit {
 
-  bears: any = [];
+  plans: any = [];
 
   constructor( private testService: TestService) { }
 
   ngOnInit() {
-    this.testService.getAllPosts().subscribe(bears => {
-      this.bears = bears;
+    this.testService.getAllPlans().subscribe(plans => {
+      this.plans = plans;
     });
+  }
+
+  getPeriod(period) {
+    switch (period) {
+      case 'active':
+        return 'label-success';
+      case 'past':
+        return 'label-default';
+      case 'in plans':
+        return 'label-info';
+      case 'in future':
+        return 'label-primary';
+    }
   }
 
 }
