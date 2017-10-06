@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PlanDashboardComponent } from './plan-dashboard/plan-dashboard.component';
 import { AddPlanModalComponent } from './add-plan-modal/add-plan-modal.component';
+import { DatepickerComponent } from './datepicker/datepicker.component';
+
 
 const ROUTES = [
   {
@@ -32,14 +34,15 @@ const ROUTES = [
     AppComponent,
     DashboardComponent,
     PlanDashboardComponent,
-    AddPlanModalComponent
+    AddPlanModalComponent,
+    DatepickerComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES),
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
   ],
   providers: [TestService],
   bootstrap: [AppComponent]

@@ -74,3 +74,41 @@
 .modal.show .modal-dialog {
   transform: translate(0);
 }
+
+app-datepicker .dropdown-menu {
+  display: block;
+}
+
+.input-group input.form-control {
+  width: 434px;
+}
+app-datepicker {
+  display: block;
+  .input-group {
+    width: 100%;
+  }
+  .dropdown-menu {
+    //width: 100%;
+  }
+  select[_ngcontent-c8] {
+    min-width: calc(50% - 36px);
+  }
+  .d-flex {
+    display: flex;
+  }
+  .ngb-dp-day[_ngcontent-c7], .ngb-dp-weekday[_ngcontent-c7], .ngb-dp-week-number[_ngcontent-c7] {
+    width: 4rem;
+    height: 3rem;
+    text-align: center;
+    [_nghost-c5] {
+      width: 4rem;
+    }
+  }
+  ngb-datepicker-navigation-select {
+    width: 21rem !important;
+  }
+}
+.input-group-addon, .input-group-btn, .input-group .form-control {
+  display: table-cell;
+  height: 38px;
+}
