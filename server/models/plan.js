@@ -2,11 +2,10 @@ var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema;
 
 var PlanSchema   = new Schema({
-  id: Number,
   title: String,
-  date: String,
+  date: {},
   period: String,
-  img: String
+  planImage: String
 });
 
 module.exports = mongoose.model('Plan', PlanSchema);

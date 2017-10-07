@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TestService } from '../test.service';
+import { AddPlanService } from '../services/add-plan.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,8 +11,18 @@ import { TestService } from '../test.service';
 export class DashboardComponent implements OnInit {
 
   plans: any = [];
+  subscription: Subscription;
 
-  constructor( private testService: TestService) { }
+  constructor( private testService: TestService,
+               private addPlanService: AddPlanService) {
+    this.subscription = addPlanService.planAdded$.subscribe(
+      message => {
+        this.testService.getAllPlans().subscribe(plans => {
+          this.plans = plans;
+        });
+        console.log(message);
+    });
+  }
 
   ngOnInit() {
     this.testService.getAllPlans().subscribe(plans => {

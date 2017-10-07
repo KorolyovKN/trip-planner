@@ -1,13 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { Plan } from '../models/plan';
+import { TestService } from '../test.service';
 
-export class Plan {
-  constructor( public title: string,
-               public date: {},
-               public period: string,
-               public imgUrl: string) {}
-}
+
 
 @Component({
   selector: `[app-add-plan-modal]`,
@@ -16,27 +12,29 @@ export class Plan {
 })
 export class AddPlanModalComponent implements OnInit {
 
-  plan: Plan;
-  title: string;
-  period: string;
-  date: {};
-  imgUrl: string;
+  @Output() onChanged = new EventEmitter<object>();
+
+  plan: Plan = new Plan();
+  planName: string;
+  errorMessage: string;
 
   closeResult: string;
 
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal,
+              private testService: TestService) {}
 
-  onChanged(date) {
-    this.date = date;
-    console.log(date);
+  dateChanged(date) {
+    this.plan.date = date;
   }
 
-  addPlan(title: string, date: {}, period: string, imgUrl: string) {
-    this.plan = new Plan(title, date, period, imgUrl);
-    console.log(this.plan);
-    this.title = null;
-    this.date = {};
-    this.period = null;
+  addPlan(c): void {
+    this.testService.postPlan(this.plan)
+      .subscribe(plan => {
+        this.reset();
+        this.planName = plan.planImage;
+      }, error => this.errorMessage = <any>error);
+    c();
+    this.onChanged.emit(event);
   }
 
   open(content) {
@@ -57,8 +55,15 @@ export class AddPlanModalComponent implements OnInit {
     }
   }
 
+  private reset() {
+    this.plan.title = null;
+    this.plan.date = null;
+    this.plan.period = null;
+    this.plan.planImage = null;
+  }
+
   ngOnInit() {
-    this.imgUrl = '/assets/images/California.jpg';
+    this.plan.planImage = '/assets/images/California.jpg';
   }
 
 }

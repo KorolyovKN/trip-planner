@@ -3,9 +3,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import { TestService } from './test.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { TestService } from './test.service';
+import { AddPlanService } from './services/add-plan.service';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PlanDashboardComponent } from './plan-dashboard/plan-dashboard.component';
@@ -44,7 +45,7 @@ const ROUTES = [
     RouterModule.forRoot(ROUTES),
     NgbModule.forRoot(),
   ],
-  providers: [TestService],
+  providers: [TestService, AddPlanService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

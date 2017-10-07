@@ -15,7 +15,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                  <a app-add-plan-modal></a>
+                  <a app-add-plan-modal (onChanged)="planAdded()"></a>
                 </li>
                 <li>
                     <a
