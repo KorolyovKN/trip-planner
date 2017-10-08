@@ -15,6 +15,7 @@ export class AddPlanModalComponent implements OnInit {
   @Output() onChanged = new EventEmitter<object>();
 
   plan: Plan = new Plan();
+  files: any;
   planName: string;
   errorMessage: string;
 
@@ -27,11 +28,36 @@ export class AddPlanModalComponent implements OnInit {
     this.plan.date = date;
   }
 
+  addPhoto(event) {
+    let target = event.target || event.srcElement;
+    this.files = target.files;
+  }
+
   addPlan(c): void {
-    this.testService.postPlan(this.plan)
+    let final_data;
+    if(this.files) {
+      let formData = new FormData();
+      formData.append('photo', this.files[0]);
+
+      formData.append('data', JSON.stringify(this.plan));
+      final_data = formData;
+      var outputLog = {}, iterator = final_data.entries(), end = false;
+      while(end == false) {
+        var item = iterator.next();
+        if(item.value!=undefined) {
+          outputLog[item.value[0]] = item.value[1];
+        } else if(item.done==true) {
+          end = true;
+        }
+      }
+      console.log(outputLog);
+    } else {
+      final_data = this.plan;
+    }
+    this.testService.postPlan(final_data)
       .subscribe(plan => {
         this.reset();
-        this.planName = plan.planImage;
+        this.planName = plan.title;
       }, error => this.errorMessage = <any>error);
     c();
     this.onChanged.emit(event);

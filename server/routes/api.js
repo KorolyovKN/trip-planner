@@ -35,13 +35,15 @@ router.route('/plans')
     plan.title = req.body.title;
     plan.date = req.body.date;
     plan.period = req.body.period;
-    plan.img = req.body.img;
+    plan.img = req.body.planImage;
 
-    plan.save(function (err) {
+    console.log(req.body);
+
+    /*plan.save(function (err) {
       if(err)
         res.send(err);
       res.json({message: 'Post created!'});
-    });
+    });*/
   })
   .get(function (req, res) {
     Plan.find(function (err, plans) {
