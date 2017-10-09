@@ -30,6 +30,11 @@ export class TestService {
       .map(this.extractData).catch(this.handleErrorObservable);
   }
 
+  uploadImg(img) {
+    return this.http.post('/api/upload', img)
+      .map((res: any) => res).catch(this.handleErrorObservable);
+  }
+
   private extractData(res: Response) {
     let body = res.json();
     return body.data || {};

@@ -1,5 +1,20 @@
 const express = require('express');
 const router = express.Router();
+//require multer for the file uploads
+var multer = require('multer');
+// set the directory for the uploads to the uploaded to
+//var DIR = './src/assets/images/uploads/';
+var DIR = './dist/assets/images/uploads/';
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './dist/assets/images/uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+//define the type of upload multer would be doing and pass in its destination, in our case, its a single file with the name photo
+var upload = multer({storage: storage}).single('photo');
 
 /* GET api listing. */
 router.get('/', (req, res) => {
@@ -35,15 +50,13 @@ router.route('/plans')
     plan.title = req.body.title;
     plan.date = req.body.date;
     plan.period = req.body.period;
-    plan.img = req.body.planImage;
+    plan.planImage = req.body.planImage;
 
-    console.log(req.body);
-
-    /*plan.save(function (err) {
+    plan.save(function (err) {
       if(err)
         res.send(err);
       res.json({message: 'Post created!'});
-    });*/
+    });
   })
   .get(function (req, res) {
     Plan.find(function (err, plans) {
@@ -52,5 +65,20 @@ router.route('/plans')
       res.json(plans);
     });
   });
+
+//our file upload function.
+router.post('/upload', function (req, res, next) {
+  var path = '';
+  upload(req, res, function (err) {
+    if (err) {
+      // An error occurred when uploading
+      console.log(err);
+      return res.status(422).send("an Error occured")
+    }
+    // No error occured.
+    path = req.file.originalname;
+    return res.send(path);
+  });
+})
 
 module.exports = router;

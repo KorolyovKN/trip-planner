@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, EventEmitter, Output } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Plan } from '../models/plan';
 import { TestService } from '../test.service';
@@ -22,39 +22,33 @@ export class AddPlanModalComponent implements OnInit {
   closeResult: string;
 
   constructor(private modalService: NgbModal,
-              private testService: TestService) {}
+              private testService: TestService,
+              private el: ElementRef) {}
 
   dateChanged(date) {
     this.plan.date = date;
   }
 
-  addPhoto(event) {
-    let target = event.target || event.srcElement;
-    this.files = target.files;
+  upload(event) {
+    let inputEl = event.target || event.srcElement;;
+    console.log('iam+ ' + inputEl);
+    let fileCount: number = inputEl.files.length;
+    let formData = new FormData();
+    if (fileCount > 0) {
+      for (let i = 0; i < fileCount; i++) {
+        formData.append('photo', inputEl.files.item(i));
+      }
+      this.testService.uploadImg(formData).subscribe(
+        (success) => {
+          this.plan.planImage = success._body;
+        },
+        (error) => alert(error)
+      );
+    }
   }
 
   addPlan(c): void {
-    let final_data;
-    if(this.files) {
-      let formData = new FormData();
-      formData.append('photo', this.files[0]);
-
-      formData.append('data', JSON.stringify(this.plan));
-      final_data = formData;
-      var outputLog = {}, iterator = final_data.entries(), end = false;
-      while(end == false) {
-        var item = iterator.next();
-        if(item.value!=undefined) {
-          outputLog[item.value[0]] = item.value[1];
-        } else if(item.done==true) {
-          end = true;
-        }
-      }
-      console.log(outputLog);
-    } else {
-      final_data = this.plan;
-    }
-    this.testService.postPlan(final_data)
+    this.testService.postPlan(this.plan)
       .subscribe(plan => {
         this.reset();
         this.planName = plan.title;

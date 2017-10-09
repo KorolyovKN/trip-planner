@@ -10,10 +10,10 @@
     <li class="thumbnail portfolio-thumbnail"
         routerLink="/plan"
         *ngFor="let plan of plans">
-      <img [src]="plan.img" alt="thumbnail">
+      <img [src]="'/assets/images/uploads/' + plan.planImage" alt="thumbnail">
       <div class="caption">
         <h3>{{plan.title}}</h3>
-        <p>{{plan.date}}</p>
+        <p>{{plan.date.day + '.' + plan.date.month + '.'  + plan.date.year}}</p>
         <p><span class="label" [ngClass]="getPeriod(plan.period)">{{plan.period}}</span></p>
         <p class="button-holder">
           <a href="#" class="btn btn-primary">Open</a>
