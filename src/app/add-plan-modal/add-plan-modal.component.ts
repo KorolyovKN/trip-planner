@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Plan } from '../models/plan';
 import { TestService } from '../test.service';
@@ -15,15 +15,13 @@ export class AddPlanModalComponent implements OnInit {
   @Output() onChanged = new EventEmitter<object>();
 
   plan: Plan = new Plan();
-  files: any;
   planName: string;
   errorMessage: string;
 
   closeResult: string;
 
   constructor(private modalService: NgbModal,
-              private testService: TestService,
-              private el: ElementRef) {}
+              private testService: TestService) {}
 
   dateChanged(date) {
     this.plan.date = date;
@@ -48,13 +46,16 @@ export class AddPlanModalComponent implements OnInit {
   }
 
   addPlan(c): void {
+    if (!this.plan.planImage) {
+      this.plan.planImage = 'California.jpg';
+    }
     this.testService.postPlan(this.plan)
       .subscribe(plan => {
         this.reset();
         this.planName = plan.title;
+        this.onChanged.emit(event);
       }, error => this.errorMessage = <any>error);
     c();
-    this.onChanged.emit(event);
   }
 
   open(content) {
@@ -83,7 +84,8 @@ export class AddPlanModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.plan.planImage = '/assets/images/California.jpg';
+    this.plan.planImage = null;
+    this.plan.period = ''
   }
 
 }

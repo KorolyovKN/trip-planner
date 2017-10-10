@@ -7,7 +7,7 @@ var multer = require('multer');
 var DIR = './dist/assets/images/uploads/';
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './dist/assets/images/uploads/')
+    cb(null, './uploads/')
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname)
@@ -80,5 +80,15 @@ router.post('/upload', function (req, res, next) {
     return res.send(path);
   });
 })
+
+//get single plan
+router.route('/plan/:plan_id')
+  .get(function(req, res) {
+    Plan.findById(req.params.plan_id, function (err, plan) {
+      if (err)
+        res.send(err);
+      res.json(plan);
+    });
+  })
 
 module.exports = router;

@@ -20,7 +20,7 @@ const ROUTES = [
     component: DashboardComponent
   },
   {
-    path: 'plan',
+    path: 'plan/:id',
     component: PlanDashboardComponent
   },
   {

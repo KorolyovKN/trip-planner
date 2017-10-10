@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit {
           this.plans = plans;
         });
         console.log(message);
+        console.log(this.plans);
     });
   }
 

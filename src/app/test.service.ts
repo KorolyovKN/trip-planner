@@ -13,12 +13,17 @@ export class TestService {
 
   // Get all posts from the API
   getAllPosts() {
-    return this.http.get('/api/bears')
+    return this.http.get('http://localhost:3000/api/bears')
       .map( res => res.json());
   }
 
   getAllPlans() {
-    return this.http.get('/api/plans')
+    return this.http.get('http://localhost:3000/api/plans')
+      .map( res => res.json());
+  }
+
+  getCurrentPlan(planId) {
+    return this.http.get('http://localhost:3000/api/plan/'+planId)
       .map( res => res.json());
   }
 
@@ -26,12 +31,12 @@ export class TestService {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers});
 
-    return this.http.post('/api/plans', plan, options)
+    return this.http.post('http://localhost:3000/api/plans', plan, options)
       .map(this.extractData).catch(this.handleErrorObservable);
   }
 
   uploadImg(img) {
-    return this.http.post('/api/upload', img)
+    return this.http.post('http://localhost:3000/api/upload', img)
       .map((res: any) => res).catch(this.handleErrorObservable);
   }
 

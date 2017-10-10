@@ -1,3 +1,6 @@
+input, input:focus {
+  outline: none;
+}
 .m-both-xs {
   margin-top: 5px;
   margin-bottom: 5px;
@@ -80,7 +83,7 @@ app-datepicker .dropdown-menu {
 }
 
 .input-group input.form-control {
-  width: 434px;
+  width: 422px;
 }
 app-datepicker {
   display: block;
@@ -111,4 +114,5 @@ app-datepicker {
 .input-group-addon, .input-group-btn, .input-group .form-control {
   display: table-cell;
   height: 38px;
+  width: 37px;
 }
