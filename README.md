@@ -26,3 +26,6 @@ Before running the tests make sure you are serving the app via `ng serve`.
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+database - https://mlab.com/login/?r=%2Fdatabases%2Fmy-test-database%2Fcollections%2Fplans%3Fq%3D%26f%3D%26s%3D%26pageNum%3D0%26pageSize%3D10
+Kostil/alldisign1
