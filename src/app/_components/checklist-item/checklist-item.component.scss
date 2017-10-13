@@ -1,0 +1,16 @@
+.editable-row {
+  .label-row {
+    display: block;
+  }
+  .input-row {
+    display: none;
+  }
+  &.active {
+    .label-row {
+      display: none;
+    }
+    .input-row {
+      display: block;
+    }
+  }
+}

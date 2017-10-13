@@ -1,0 +1,36 @@
+<div class="form-group editable-row"
+  [ngClass]="{'active': itemEditing}">
+  <div class="row label-row">
+    <div class="col-xs-11">
+      <label class="control-label">{{itemContent}}</label>
+    </div>
+    <div class="col-xs-1">
+      <button type="button"
+              class="btn btn-link btn-sm pull-right"
+              placement="left"
+              ngbTooltip="Edit"
+              (click)="itemEdit()">
+        <span class="glyphicon glyphicon-pencil"></span>
+      </button>
+    </div>
+  </div>
+  <div class="row input-row">
+    <div class="col-xs-11">
+      <input name="title" type="text" class="form-control input-sm " placeholder="List item name" [(ngModel)]="itemContent">
+    </div>
+    <div class="col-xs-1">
+      <button type="button"
+              class="btn btn-link btn-sm pull-right"
+              placement="left"
+              ngbTooltip="Save changes"
+              (click)="itemEdit()">
+        <span class="glyphicon glyphicon-ok"></span>
+      </button>
+    </div>
+  </div>
+  <app-item-status-btns
+    [itemStatus]="itemStatus"
+    class="btn-group btn-group-xs btn-group-justified"
+    (onChanged)="statusOnChanged($event)"
+  ></app-item-status-btns>
+</div>

@@ -1,12 +1,8 @@
-type ItemChecked =
-  | 'prepeared'
-  | 'checkd'
-  | 'in bag';
+import { ItemChecked } from './item-checked';
 
 
 class ItemsList {
   itemContent: string;
-  itemDone: boolean;
   itemChecked: ItemChecked;
 }
 export class Checklist {

@@ -116,3 +116,22 @@ app-datepicker {
   height: 38px;
   width: 37px;
 }
+
+.badge {
+  &.none {
+    @extend .bg-danger;
+  }
+  &.prepared {
+    @extend .bg-warning;
+  }
+  &.checked {
+    @extend .bg-info;
+  }
+  &.in-bag {
+    @extend .bg-success;
+  }
+}
+
+.tooltip.show {
+  opacity: 1;
+}

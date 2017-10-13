@@ -1,0 +1,20 @@
+<div class="btn btn-danger"
+     [ngClass]="{'btn-danger':itemStatus == 'none',
+     'btn-default': itemStatus != 'none'}"
+     (click)="statusOnChanged('none')"
+>none</div>
+<div class="btn"
+     [ngClass]="{'btn-warning':itemStatus == 'prepared',
+     'btn-default': itemStatus != 'prepared'}"
+     (click)="statusOnChanged('prepared')"
+>prepared</div>
+<div class="btn btn-info"
+     [ngClass]="{'btn-info':itemStatus == 'checked',
+     'btn-default': itemStatus != 'checked'}"
+     (click)="statusOnChanged('checked')"
+>checked</div>
+<div class="btn btn-success"
+     [ngClass]="{'btn-success':itemStatus == 'in-bag',
+     'btn-default': itemStatus != 'in-bag'}"
+     (click)="statusOnChanged('in-bag')"
+>in-bag</div>
