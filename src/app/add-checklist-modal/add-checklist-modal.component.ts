@@ -48,6 +48,12 @@ export class AddChecklistModalComponent implements OnInit {
     this.checklist.items[index].itemChecked = event[0];
   }
 
+  onAddItem(event) {
+    let item = {itemContent:event[0], itemChecked:event[1]};
+    this.checklist.items.push(item);
+    console.log(event);
+  }
+
   saveChecklist() {
     console.log(this.checklist.items);
   }

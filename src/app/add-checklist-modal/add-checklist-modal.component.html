@@ -14,22 +14,9 @@
         (onChanged)="itemOnChanges($event, i)"
       ></app-checklist-item>
 
-
-      <div class="form-group">
-        <div class="row input-row">
-          <div class="col-xs-11">
-            <input name="title" type="text" class="form-control input-sm " placeholder="List item name" required>
-          </div>
-          <div class="col-xs-1">
-            <button type="button"
-                    class="btn btn-link btn-sm pull-right"
-                    placement="left"
-                    ngbTooltip="Save changes">
-              <span class="glyphicon glyphicon-ok"></span>
-            </button>
-          </div>
-        </div>
-      </div>
+      <app-add-checklist-item
+        (onChanged)="onAddItem($event)">
+      </app-add-checklist-item>
 
     </form>
   </div>
