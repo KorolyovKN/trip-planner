@@ -43,6 +43,15 @@ export class AddChecklistModalComponent implements OnInit {
 
   }
 
+  itemOnChanges(event, index) {
+    this.checklist.items[index].itemContent = event[1];
+    this.checklist.items[index].itemChecked = event[0];
+  }
+
+  saveChecklist() {
+    console.log(this.checklist.items);
+  }
+
   open(content) {
     this.modalService.open(content).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;

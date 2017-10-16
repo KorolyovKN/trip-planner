@@ -19,14 +19,19 @@ export class ChecklistItemComponent {
   statusOnChanged(status) {
     this.itemStatus = status;
     console.log(status);
+    this.itemOnChanges(status, this.itemContent);
   }
 
-  itemEdit() {
+  itemEdit(needSave) {
     this.itemEditing ? this.itemEditing = false : this.itemEditing = true;
+    if (needSave) {
+      this.itemOnChanges(this.itemStatus, this.itemContent);
+    }
   }
 
   itemOnChanges(status, content) {
     const item = [status, content];
+    console.log(item);
     this.onChanged.emit(item);
   }
 

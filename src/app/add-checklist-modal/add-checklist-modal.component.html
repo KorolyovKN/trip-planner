@@ -8,10 +8,10 @@
   <div class="modal-body">
     <form>
       <app-checklist-item
-        *ngFor="let item of checklist.items"
+        *ngFor="let item of checklist.items; let i = index"
         [itemContent]="item.itemContent"
         [itemStatus]="item.itemChecked"
-        (itemOnChanges)="itemOnChanges($event)"
+        (onChanged)="itemOnChanges($event, i)"
       ></app-checklist-item>
 
 
@@ -35,7 +35,8 @@
   </div>
   <div class="modal-footer">
     <button type="button"
-            class="btn btn btn-primary">
+            class="btn btn btn-primary"
+            (click)="saveChecklist()">
       Add Checklist</button>
     <button type="button" class="btn btn btn-primary" (click)="c('Close click')">Close</button>
   </div>
