@@ -4,40 +4,24 @@ import { Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
-import { Plan } from './models/plan';
+import { Checklist } from '../models/checklist';
 
 @Injectable()
-export class TestService {
+export class ChecklistService {
 
   constructor(private http: Http) { }
 
-  // Get all posts from the API
-  getAllPosts() {
-    return this.http.get('http://localhost:3000/api/bears')
+  getChecklists(planId) {
+    return this.http.get('http://localhost:3000/api/checklist/' + planId)
       .map( res => res.json());
   }
 
-  getAllPlans() {
-    return this.http.get('http://localhost:3000/api/plans')
-      .map( res => res.json());
-  }
-
-  getCurrentPlan(planId) {
-    return this.http.get('http://localhost:3000/api/plan/'+planId)
-      .map( res => res.json());
-  }
-
-  postPlan(plan: Plan): Observable<Plan> {
+  postChecklist(checklist: Checklist): Observable<Checklist> {
     const headers = new Headers({'Content-Type': 'application/json'});
     const options = new RequestOptions({ headers: headers});
 
-    return this.http.post('http://localhost:3000/api/plans', plan, options)
+    return this.http.post('http://localhost:3000/api/checklists', checklist, options)
       .map(this.extractData).catch(this.handleErrorObservable);
-  }
-
-  uploadImg(img) {
-    return this.http.post('http://localhost:3000/api/upload', img)
-      .map((res: any) => res).catch(this.handleErrorObservable);
   }
 
   private extractData(res: Response) {
@@ -48,4 +32,5 @@ export class TestService {
     console.error(error.message || error);
     return Observable.throw(error.message || error);
   }
+
 }

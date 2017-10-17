@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
 import { TestService } from '../test.service';
+import { ChecklistService } from '../services/checklist.service';
+
 
 @Component({
   selector: 'app-plan-dashboard',
@@ -12,9 +14,11 @@ export class PlanDashboardComponent implements OnInit {
   id: number;
   plan: any;
   loading = true;
+  checklists: any;
 
   constructor(private activateRoute: ActivatedRoute,
-              private testService: TestService) {
+              private testService: TestService,
+              private checklistService: ChecklistService) {
     this.id = activateRoute.snapshot.params['id'];
   }
 
@@ -23,6 +27,18 @@ export class PlanDashboardComponent implements OnInit {
       this.plan = plan;
       this.loading = false;
       console.log(this.plan);
+    });
+
+    this.checklistService.getChecklists(this.id).subscribe(checklists => {
+      this.checklists = checklists;
+      console.log(this.checklists);
+    });
+  }
+
+  checklistAdded() {
+    this.checklistService.getChecklists(this.id).subscribe(checklists => {
+      this.checklists = checklists;
+      console.log(this.checklists);
     });
   }
 
@@ -38,5 +54,9 @@ export class PlanDashboardComponent implements OnInit {
         return 'label-primary';
     }
   }
+
+  getPlanId() {
+    return this.id;
+}
 
 }

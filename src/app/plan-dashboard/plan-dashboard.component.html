@@ -18,10 +18,17 @@
       <ng-template ngbTabContent>
         <div class="dashboard-controls clearfix m-top-xs">
           <div class="btn-group btn-group-xs">
-            <label class="btn btn-default" app-add-checklist-modal>add check list</label>
+            <label class="btn btn-default"
+                   [planId]="getPlanId()"
+                   app-add-checklist-modal
+                   (onChanged)="checklistAdded()">add check list</label>
           </div>
         </div>
-        <ul app-checklist class="portfolio aligned-left">
+        <ul class="portfolio aligned-left">
+          <li class="thumbnail portfolio-thumbnail"
+              *ngFor="let checklist of checklists"
+              [checklist]="checklist"
+              app-checklist></li>
 
         </ul>
       </ng-template>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Checklist } from '../models/checklist';
 
 @Component({
@@ -8,35 +8,14 @@ import { Checklist } from '../models/checklist';
 })
 export class ChecklistComponent implements OnInit {
 
-  checklist = new Checklist();
   shortList: Object[];
+
+  @Input() checklist: Checklist;
 
   constructor() { }
 
   ngOnInit() {
-    this.checklist.title = 'My checklist';
-    this.checklist.listCategory = 'clothes';
-    this.checklist.items = [
-      {
-        itemContent: 'Tshorts',
-        itemChecked: 'none'
-      },
-      {
-        itemContent: 'Hats',
-        itemChecked: 'prepared'
-      },
-      {
-        itemContent: 'Pants',
-        itemChecked: 'checked'
-      }
-      ,
-      {
-        itemContent: 'Shoose',
-        itemChecked: 'in-bag'
-      }
-    ];
-
-    this.shortList = this.checklist.items.slice(0, 2);
+    this.shortList = this.checklist.items.slice(0, 4);
   }
 
   listOpen(event) {

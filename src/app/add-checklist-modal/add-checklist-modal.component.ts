@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Checklist } from '../models/checklist';
+
+import { ChecklistService } from '../services/checklist.service';
 
 @Component({
   selector: `[app-add-checklist-modal]`,
@@ -9,17 +11,30 @@ import { Checklist } from '../models/checklist';
 })
 export class AddChecklistModalComponent implements OnInit {
 
+  @Output() onChanged = new EventEmitter<object>();
+
   closeResult: string;
+
+  errorMessage: string;
 
   checklist = new Checklist();
 
+  checklistGroups = [
+    'clothes',
+    'gadjets',
+    'documents'
+  ];
+
+  @Input() planId: string;
 
 
-  constructor(private modalService: NgbModal) { }
+
+  constructor(private modalService: NgbModal,
+              private checklistService: ChecklistService) {}
 
   ngOnInit() {
 
-    this.checklist.title = 'My checklist';
+    /*this.checklist.title = 'My checklist';
     this.checklist.listCategory = 'clothes';
     this.checklist.items = [
       {
@@ -39,7 +54,10 @@ export class AddChecklistModalComponent implements OnInit {
         itemContent: 'Shoose',
         itemChecked: 'in-bag'
       }
-    ];
+    ];*/
+    this.checklist.planId = this.planId;
+
+    this.checklist.items = [];
 
   }
 
@@ -49,13 +67,24 @@ export class AddChecklistModalComponent implements OnInit {
   }
 
   onAddItem(event) {
-    let item = {itemContent:event[0], itemChecked:event[1]};
+    const item = {itemContent: event[0], itemChecked: event[1]};
     this.checklist.items.push(item);
     console.log(event);
   }
 
-  saveChecklist() {
-    console.log(this.checklist.items);
+  saveChecklist(c): void {
+    this.checklistService.postChecklist(this.checklist)
+      .subscribe(checklist => {
+        this.reset();
+        this.onChanged.emit(event);
+      }, error => this.errorMessage = <any>error);
+    c();
+  }
+
+  private reset() {
+    this.checklist.title = null;
+    this.checklist.listCategory = null;
+    this.checklist.items = [];
   }
 
   open(content) {

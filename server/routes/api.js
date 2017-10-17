@@ -27,6 +27,7 @@ mongoose.connect('mongodb://node:node@ds145293.mlab.com:45293/my-test-database',
 
 var Bear     = require('../models/bear');
 var Plan     = require('../models/Plan');
+var Checklist     = require('../models/Checklist');
 
 // Handle the connection event
 var db = mongoose.connection;
@@ -66,6 +67,30 @@ router.route('/plans')
     });
   });
 
+router.route('/checklists')
+  .post(function (req, res) {
+    var checklist = new Checklist();
+    checklist.planId = req.body.planId;
+    checklist.title = req.body.title;
+    checklist.listCategory = req.body.listCategory;
+    checklist.items = req.body.items;
+
+    checklist.save(function (err) {
+      if(err)
+        res.send(err);
+      res.json({message: 'Checklist created!'});
+    });
+  });
+
+router.route('/checklist/:plan_id')
+  .get(function(req, res) {
+    Checklist.find({'planId': req.params.plan_id}, function (err, list) {
+      if (err)
+        res.send(err);
+      res.json(list);
+    });
+  });
+
 //our file upload function.
 router.post('/upload', function (req, res, next) {
   var path = '';
@@ -89,6 +114,6 @@ router.route('/plan/:plan_id')
         res.send(err);
       res.json(plan);
     });
-  })
+  });
 
 module.exports = router;

@@ -7,6 +7,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { TestService } from './test.service';
 import { AddPlanService } from './services/add-plan.service';
+import { ChecklistService } from './services/checklist.service';
+
+import { DoneSortPipe } from './pipes/doneSortPipe';
+
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PlanDashboardComponent } from './plan-dashboard/plan-dashboard.component';
@@ -46,7 +50,8 @@ const ROUTES = [
     AddChecklistModalComponent,
     ChecklistItemComponent,
     ItemStatusBtnsComponent,
-    AddChecklistItemComponent
+    AddChecklistItemComponent,
+    DoneSortPipe
   ],
   imports: [
     BrowserModule,
@@ -55,7 +60,11 @@ const ROUTES = [
     RouterModule.forRoot(ROUTES),
     NgbModule.forRoot(),
   ],
-  providers: [TestService, AddPlanService],
+  providers: [
+    TestService,
+    AddPlanService,
+    ChecklistService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

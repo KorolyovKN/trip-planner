@@ -7,6 +7,16 @@
   </div>
   <div class="modal-body">
     <form>
+      <div class="form-group">
+        <label class="control-label">Checklist title</label>
+        <input name="title" type="text" class="form-control input-sm " placeholder="Checklist title" [(ngModel)]="checklist.title">
+      </div>
+      <div class="form-group">
+        <label class="control-label">Checklist type</label>
+        <select name="group" [(ngModel)]="checklist.listCategory" class="form-control input-sm">
+          <option value="{{group}}" *ngFor="let group of checklistGroups">{{group}}</option>
+        </select>
+      </div>
       <app-checklist-item
         *ngFor="let item of checklist.items; let i = index"
         [itemContent]="item.itemContent"
@@ -23,7 +33,7 @@
   <div class="modal-footer">
     <button type="button"
             class="btn btn btn-primary"
-            (click)="saveChecklist()">
+            (click)="saveChecklist(c)">
       Add Checklist</button>
     <button type="button" class="btn btn btn-primary" (click)="c('Close click')">Close</button>
   </div>
