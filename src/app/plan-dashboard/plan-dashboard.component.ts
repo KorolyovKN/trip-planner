@@ -15,6 +15,7 @@ export class PlanDashboardComponent implements OnInit {
   plan: any;
   loading = true;
   checklists: any;
+  checklist2: any;
 
   constructor(private activateRoute: ActivatedRoute,
               private testService: TestService,
@@ -32,6 +33,7 @@ export class PlanDashboardComponent implements OnInit {
     this.checklistService.getChecklists(this.id).subscribe(checklists => {
       this.checklists = checklists;
       console.log(this.checklists);
+      this.checklist2 = this.checklists[0];
     });
   }
 

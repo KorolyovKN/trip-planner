@@ -21,6 +21,7 @@ import { AddChecklistModalComponent } from './add-checklist-modal/add-checklist-
 import { ChecklistItemComponent } from './_components/checklist-item/checklist-item.component';
 import { ItemStatusBtnsComponent } from './_components/item-status-btns/item-status-btns.component';
 import { AddChecklistItemComponent } from './_components/add-checklist-item/add-checklist-item.component';
+import { EditChecklistComponent } from './_components/edit-checklist/edit-checklist.component';
 
 
 const ROUTES = [
@@ -51,7 +52,8 @@ const ROUTES = [
     ChecklistItemComponent,
     ItemStatusBtnsComponent,
     AddChecklistItemComponent,
-    DoneSortPipe
+    DoneSortPipe,
+    EditChecklistComponent
   ],
   imports: [
     BrowserModule,

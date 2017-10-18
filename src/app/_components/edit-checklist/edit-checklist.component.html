@@ -1,0 +1,35 @@
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title">Edit list</h4>
+  </div>
+  <div class="modal-body">
+    <h4>{{checklist.title}}</h4>
+    <h6>{{checklist.listCategory}}</h6>
+    <form>
+      <app-checklist-item
+        *ngFor="let item of checklist.items | sort: byChecked; let i = index"
+        [itemContent]="item.itemContent"
+        [itemStatus]="item.itemChecked"
+        (onChanged)="itemOnChanges($event, i)"
+      ></app-checklist-item>
+
+      <app-add-checklist-item
+        (onChanged)="onAddItem($event)">
+      </app-add-checklist-item>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button"
+            class="btn btn btn-primary"
+            (click)="saveChecklist(c)">
+      Save Checklist</button>
+    <button type="button" class="btn btn btn-primary" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>
+
+<span (click)="open(content)">edit list</span>
+

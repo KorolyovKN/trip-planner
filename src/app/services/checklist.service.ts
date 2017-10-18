@@ -24,6 +24,26 @@ export class ChecklistService {
       .map(this.extractData).catch(this.handleErrorObservable);
   }
 
+  updateChecklist(checklist: Checklist): Observable<Checklist> {
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const options = new RequestOptions({ headers: headers});
+
+    const url = `http://localhost:3000/api/checklistUpdate/${checklist._id}`;
+
+    return this.http.put(url, checklist, options)
+      .map(this.extractData).catch(this.handleErrorObservable);
+  }
+
+  deleteChecklist(checklist: Checklist) {
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const options = new RequestOptions({ headers: headers});
+
+    const url = `http://localhost:3000/api/checklistDelete/${checklist._id}`;
+
+    return this.http.delete(url, options)
+      .subscribe((ok) => {console.log(ok)});
+  }
+
   private extractData(res: Response) {
     const body = res.json();
     return body.data || {};

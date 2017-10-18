@@ -6,6 +6,7 @@ class ItemsList {
   itemChecked: ItemChecked;
 }
 export class Checklist {
+  _id: string;
   planId: string;
   title: string;
   listCategory: string;

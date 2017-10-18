@@ -91,6 +91,32 @@ router.route('/checklist/:plan_id')
     });
   });
 
+router.route('/checklistUpdate/:checklist_id')
+  .put(function(req, res){
+    Checklist.findById(req.params.checklist_id, function (err, list) {
+      if(err)
+        res.send(err)
+
+      list.items = req.body.items;
+
+      list.save(function (err) {
+        if(err)
+          res.send(err);
+        res.json({message: 'Checklist updated!'});
+      });
+    })
+  });
+
+router.route('/checklistDelete/:checklist_id')
+  .delete(function (req, res) {
+    Checklist.remove({_id: req.params.checklist_id}, function(err){
+      if (err)
+        res.send(err)
+      res.json({message: 'Checklist depeted'});
+    })
+  });
+
+
 //our file upload function.
 router.post('/upload', function (req, res, next) {
   var path = '';

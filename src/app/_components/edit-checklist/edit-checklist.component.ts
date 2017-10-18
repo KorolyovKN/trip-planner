@@ -1,15 +1,14 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-import { Checklist } from '../models/checklist';
-
-import { ChecklistService } from '../services/checklist.service';
+import { Checklist } from '../../models/checklist';
+import { ChecklistService } from '../../services/checklist.service';
 
 @Component({
-  selector: `[app-add-checklist-modal]`,
-  templateUrl: './add-checklist-modal.component.html',
-  styleUrls: ['./add-checklist-modal.component.scss']
+  selector: `[app-edit-checklist]`,
+  templateUrl: './edit-checklist.component.html',
+  styleUrls: ['./edit-checklist.component.scss']
 })
-export class AddChecklistModalComponent implements OnInit {
+export class EditChecklistComponent implements OnInit {
 
   @Output() onChanged = new EventEmitter<object>();
 
@@ -17,15 +16,8 @@ export class AddChecklistModalComponent implements OnInit {
 
   errorMessage: string;
 
-  checklist = new Checklist();
 
-  checklistGroups = [
-    'clothes',
-    'gadjets',
-    'documents'
-  ];
-
-  @Input() planId: string;
+   @Input() checklist: Checklist;
 
 
 
@@ -33,10 +25,6 @@ export class AddChecklistModalComponent implements OnInit {
               private checklistService: ChecklistService) {}
 
   ngOnInit() {
-
-    this.checklist.planId = this.planId;
-
-    this.checklist.items = [];
 
   }
 
@@ -52,19 +40,21 @@ export class AddChecklistModalComponent implements OnInit {
   }
 
   saveChecklist(c): void {
-    this.checklistService.postChecklist(this.checklist)
+    console.log(this.checklist);
+    this.checklistService.updateChecklist(this.checklist)
       .subscribe(checklist => {
-        this.reset();
         this.onChanged.emit(event);
       }, error => this.errorMessage = <any>error);
     c();
   }
 
-  private reset() {
-    this.checklist.title = null;
-    this.checklist.listCategory = null;
-    this.checklist.items = [];
+  byChecked(a, b) {
+    enum Checked {'none', 'prepared', 'checked', 'in-bag'};
+    const ae = a.itemChecked;
+    const be = b.itemChecked;
+    return Checked[ae] > Checked[be] ? 1 : -1;
   }
+
 
   open(content) {
     this.modalService.open(content).result.then((result) => {

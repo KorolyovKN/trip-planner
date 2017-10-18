@@ -28,6 +28,7 @@
           <li class="thumbnail portfolio-thumbnail"
               *ngFor="let checklist of checklists"
               [checklist]="checklist"
+              (onChanged)="checklistAdded()"
               app-checklist></li>
 
         </ul>
